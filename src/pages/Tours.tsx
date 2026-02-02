@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import tourBayArea from "@/assets/tour-bay-area.jpg";
 import tourSunset from "@/assets/tour-sunset.jpg";
@@ -20,6 +19,10 @@ The flight continues to Alcatraz, around Angel Island, and then along the towns 
 During the approximate 40 minute tour, your skilled pilot will craft a unique and unforgettable experience as you buzz through the SF Bay Area airspace. Your flight takes place in a Cessna 172 Skyhawk with 4 seats (3 passengers and one pilot).
 
 Your departure and arrival location will be at the Hayward Executive Airport (KHWD), near the San Mateo Bridge.`,
+    bookingOptions: [
+      { passengers: 2, price: 578, link: "https://square.link/u/QWpwVyfW" },
+      { passengers: 3, price: 867, link: "https://square.link/u/KuwZKdgB" },
+    ],
   },
   {
     id: 2,
@@ -31,6 +34,10 @@ Your departure and arrival location will be at the Hayward Executive Airport (KH
 Fly directly out to the Pacific coast and soar over the Golden Gate Bridge. Continue your flight over Downtown San Francisco and along the waterfront. Look down at Fisherman's Wharf and Pier 39, then continue over Alcatraz. Fly around Angel Island, then along the coast, admiring the towns of Tiburon and Sausalito. When it is time to head back, see San Francisco International Airport (KSFO) from a totally unique angle.
 
 Our experienced pilots will make the flight truly unforgettable, giving you plenty of opportunities to take stunning aerial pictures of the sights of the beautiful bay city as you fly over them.`,
+    bookingOptions: [
+      { passengers: 2, price: 618, link: "https://square.link/u/BcShxbkk" },
+      { passengers: 3, price: 927, link: "https://square.link/u/UZ7jzqxx" },
+    ],
   },
   {
     id: 3,
@@ -40,6 +47,10 @@ Our experienced pilots will make the flight truly unforgettable, giving you plen
     description: `The San Francisco Sunset Tour is one of the most unforgettable experiences that we offer. Perfect for couples, anniversaries, flying enthusiasts, or anyone who wants to experience the beauty of the San Francisco sunset from the air.
 
 Admire as the brilliant red horizon clashes with the well-lit Downtown San Francisco. Our skilled pilots will expertly maneuver your airplane to allow you to enjoy and photograph the best views SF has to offer.`,
+    bookingOptions: [
+      { passengers: 2, price: 598, link: "https://square.link/u/sNovpR2d" },
+      { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
+    ],
   },
   {
     id: 4,
@@ -51,6 +62,10 @@ Admire as the brilliant red horizon clashes with the well-lit Downtown San Franc
 Meet your pilot at the airport, strap in, and take to the skies. Fly directly out to the Pacific Coast, admiring the Bay Lights art installation on the San Francisco-Oakland Bay Bridge. Next, fly over the engineering wonder that is the Golden Gate Bridge, it up for the night.
 
 Continue your flight over Downtown San Francisco, spotting the city's main attractions from the air. Then, follow the waterfront, admiring the city's lights as you fly. Take in the popular tourist attraction of Fisherman's Wharf and Pier 39 before landing back at the airport.`,
+    bookingOptions: [
+      { passengers: 2, price: 598, link: "https://square.link/u/cxjzzYd4" },
+      { passengers: 3, price: 897, link: "https://square.link/u/KTnZ09wK" },
+    ],
   },
   {
     id: 5,
@@ -58,6 +73,9 @@ Continue your flight over Downtown San Francisco, spotting the city's main attra
     image: tourNapa,
     duration: "1 hr 30 min",
     description: `Admire the endless vineyards of Napa Valley from a new perspective. Relax as our pilots fly you over Wine Country so you can enjoy the best views Napa has to offer. If you love greenery and experiencing the beauty of nature, this will be an unforgettable experience you won't regret!`,
+    bookingOptions: [
+      { passengers: 2, price: 638, link: "https://square.link/u/DmtCoUbX" },
+    ],
   },
 ];
 
@@ -127,12 +145,31 @@ const Tours = () => {
                       </p>
                     ))}
                   </div>
-                  <Button asChild variant="gold" size="lg">
-                    <Link to="/book">
-                      Book Online
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
+                  
+                  {/* Booking Buttons */}
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap gap-3">
+                      {tour.bookingOptions.map((option) => (
+                        <Button
+                          key={option.passengers}
+                          asChild
+                          variant="gold"
+                          size="lg"
+                        >
+                          <a
+                            href={option.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Book Now – {option.passengers} Passengers (${option.price})
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Flight time will be confirmed after booking based on availability and weather.
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -147,14 +184,16 @@ const Tours = () => {
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
               Ready to Take Flight?
             </h2>
-            <p className="text-lg text-muted-foreground mb-10">
+            <p className="text-lg text-muted-foreground mb-6">
               Book your tour today and experience San Francisco like never before.
             </p>
-            <Button asChild variant="gold" size="xl">
-              <Link to="/book">
-                Book Your Tour Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+            <p className="text-sm text-muted-foreground mb-10">
+              Flight time will be confirmed after booking based on availability and weather.
+            </p>
+            <Button asChild variant="outline" size="lg">
+              <a href="tel:5103726693">
+                Questions? Call 510 372-6693
+              </a>
             </Button>
           </div>
         </div>
