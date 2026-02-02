@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "Flight Tour Information", path: "/tours" },
   { name: "Book Online", path: "/book" },
+  { name: "Customer Reviews", path: "/reviews" },
   { name: "Contact Us", path: "/contact" },
 ];
 
