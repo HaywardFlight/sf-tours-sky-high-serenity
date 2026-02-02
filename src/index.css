@@ -2,95 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Premium Aviation Design System */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Deep midnight navy - primary brand */
+    --background: 220 30% 6%;
+    --foreground: 45 30% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card surfaces - slightly lighter navy */
+    --card: 220 28% 10%;
+    --card-foreground: 45 30% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover - matching card */
+    --popover: 220 28% 10%;
+    --popover-foreground: 45 30% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Warm luxury gold */
+    --primary: 40 55% 58%;
+    --primary-foreground: 220 30% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Muted navy */
+    --secondary: 220 25% 16%;
+    --secondary-foreground: 45 30% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted surfaces */
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Gold highlight */
+    --accent: 40 55% 58%;
+    --accent-foreground: 220 30% 6%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders & inputs */
+    --border: 220 20% 20%;
+    --input: 220 20% 18%;
+    --ring: 40 55% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Sidebar */
+    --sidebar-background: 220 28% 8%;
+    --sidebar-foreground: 45 30% 96%;
+    --sidebar-primary: 40 55% 58%;
+    --sidebar-primary-foreground: 220 30% 6%;
+    --sidebar-accent: 220 25% 16%;
+    --sidebar-accent-foreground: 45 30% 96%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 40 55% 58%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Custom premium tokens */
+    --gold: 40 55% 58%;
+    --gold-light: 40 60% 72%;
+    --gold-dark: 40 50% 45%;
+    --navy-deep: 220 30% 6%;
+    --navy-medium: 220 28% 12%;
+    --navy-light: 220 25% 18%;
+    --cream: 45 30% 96%;
+    --cream-muted: 45 15% 75%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 30% 6% / 0.95), hsl(220 28% 12% / 0.85));
+    --gradient-gold: linear-gradient(135deg, hsl(40 55% 58%), hsl(40 60% 72%));
+    --gradient-card: linear-gradient(180deg, hsl(220 28% 12%), hsl(220 30% 8%));
+    --gradient-cta: linear-gradient(135deg, hsl(40 55% 58%), hsl(40 50% 50%));
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(220 30% 6% / 0.5);
+    --shadow-gold: 0 4px 30px -8px hsl(40 55% 58% / 0.35);
+    --shadow-elevated: 0 20px 60px -15px hsl(220 30% 6% / 0.7);
+    --shadow-card: 0 8px 32px -8px hsl(220 30% 6% / 0.6);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Same as root - this is a dark theme by default */
+    --background: 220 30% 6%;
+    --foreground: 45 30% 96%;
+    --card: 220 28% 10%;
+    --card-foreground: 45 30% 96%;
+    --popover: 220 28% 10%;
+    --popover-foreground: 45 30% 96%;
+    --primary: 40 55% 58%;
+    --primary-foreground: 220 30% 6%;
+    --secondary: 220 25% 16%;
+    --secondary-foreground: 45 30% 96%;
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 15% 55%;
+    --accent: 40 55% 58%;
+    --accent-foreground: 220 30% 6%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 20%;
+    --input: 220 20% 18%;
+    --ring: 40 55% 58%;
+    --sidebar-background: 220 28% 8%;
+    --sidebar-foreground: 45 30% 96%;
+    --sidebar-primary: 40 55% 58%;
+    --sidebar-primary-foreground: 220 30% 6%;
+    --sidebar-accent: 220 25% 16%;
+    --sidebar-accent-foreground: 45 30% 96%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 40 55% 58%;
   }
 }
 
@@ -99,7 +116,116 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Premium button styles */
+  .btn-gold {
+    @apply bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-gold:hover {
+    @apply scale-105;
+    box-shadow: 0 6px 35px -6px hsl(40 55% 58% / 0.5);
+  }
+
+  /* Glass morphism card */
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border rounded-2xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Premium section spacing */
+  .section-spacing {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  /* Hero text shadow for readability */
+  .hero-text-shadow {
+    text-shadow: 0 2px 20px hsl(220 30% 6% / 0.8);
+  }
+
+  /* Gold underline accent */
+  .gold-underline {
+    @apply relative inline-block;
+  }
+
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary;
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    @apply relative rounded-2xl;
+    background: linear-gradient(135deg, hsl(40 55% 58% / 0.2), transparent);
+    padding: 1px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl;
+    background: linear-gradient(135deg, hsl(40 55% 58%), hsl(40 60% 72%));
+    opacity: 0.15;
+    z-index: -1;
+  }
+
+  /* Sticky CTA for mobile */
+  .sticky-cta {
+    @apply fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-lg border-t border-border z-50;
+  }
+
+  /* Premium image overlay */
+  .image-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(to bottom, 
+      hsl(220 30% 6% / 0.3) 0%,
+      hsl(220 30% 6% / 0.5) 50%,
+      hsl(220 30% 6% / 0.9) 100%
+    );
+  }
+
+  /* Tour card hover effect */
+  .tour-card {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .tour-card:hover {
+    @apply -translate-y-2;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Animate on scroll utility */
+  .fade-up {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .fade-up.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(40 55% 58%), hsl(40 60% 72%));
   }
 }
