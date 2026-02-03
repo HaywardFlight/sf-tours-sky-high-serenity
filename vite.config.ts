@@ -7,6 +7,10 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   base: "/sf-tours-sky-high-serenity/",
 
+  build: {
+    sourcemap: true,
+  },
+
   server: {
     host: "::",
     port: 8080,
