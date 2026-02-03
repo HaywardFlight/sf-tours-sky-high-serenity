@@ -55,7 +55,7 @@ Our experienced pilots will make the flight truly unforgettable, giving you plen
 
 Admire as the brilliant red horizon clashes with the well-lit Downtown San Francisco. Our skilled pilots will expertly maneuver your airplane to allow you to enjoy and photograph the best views SF has to offer.`,
     bookingOptions: [
-      { passengers: 2, price: 598, link: "https://square.link/u/sNovpR2d" },
+      { passengers: 2, price: 598, link: "https://square.link/u/DmtCoUbX" },
       { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
     ],
   },
@@ -81,7 +81,7 @@ Continue your flight over Downtown San Francisco, spotting the city's main attra
     duration: "1 hr 30 min",
     description: `Admire the endless vineyards of Napa Valley from a new perspective. Relax as our pilots fly you over Wine Country so you can enjoy the best views Napa has to offer. If you love greenery and experiencing the beauty of nature, this will be an unforgettable experience you won't regret!`,
     bookingOptions: [
-      { passengers: 2, price: 638, link: "https://square.link/u/DmtCoUbX" },
+      { passengers: 2, price: 638, link: "https://square.link/u/sNovpR2d" },
     ],
   },
 ];
@@ -107,7 +107,7 @@ const services = [
     name: "San Francisco Sunset Flight Tour",
     duration: "40 min",
     options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/sNovpR2d" },
+      { passengers: 2, price: 598, link: "https://square.link/u/DmtCoUbX" },
       { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
     ],
   },
@@ -123,7 +123,7 @@ const services = [
     name: "Napa Valley Wine Country Flight Tour",
     duration: "1 hr 30 min",
     options: [
-      { passengers: 2, price: 638, link: "https://square.link/u/DmtCoUbX" },
+      { passengers: 2, price: 638, link: "https://square.link/u/sNovpR2d" },
     ],
   },
 ];
