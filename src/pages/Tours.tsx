@@ -2,6 +2,7 @@ import { Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import tourBayArea from "@/assets/tour-bay-area.jpg";
+import tourElite from "@/assets/tour-elite.jpg";
 import tourSunset from "@/assets/tour-sunset.jpg";
 import tourNight from "@/assets/tour-night.jpg";
 import tourNapa from "@/assets/tour-napa.jpg";
@@ -27,7 +28,7 @@ Your departure and arrival location will be at the Hayward Executive Airport (KH
   {
     id: 2,
     name: "Elite San Francisco Bay Area Tour",
-    image: tourBayArea,
+    image: tourElite,
     duration: "1 hr",
     description: `If 40 minutes is not enough to satisfy your need to explore San Francisco from the air, then the Elite SF Bay Tour package is for you! Your journey begins at Hayward Executive Airport as you climb aboard a Cessna 172 Skyhawk, with seats for 3 passengers in addition to the pilot.
 
