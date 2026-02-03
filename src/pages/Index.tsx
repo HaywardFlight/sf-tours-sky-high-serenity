@@ -70,8 +70,8 @@ Meet your pilot at the airport, strap in, and take to the skies. Fly directly ou
 
 Continue your flight over Downtown San Francisco, spotting the city's main attractions from the air. Then, follow the waterfront, admiring the city's lights as you fly. Take in the popular tourist attraction of Fisherman's Wharf and Pier 39 before landing back at the airport.`,
     bookingOptions: [
-      { passengers: 2, price: 598, link: "https://square.link/u/cxjzzYd4" },
-      { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
+      { passengers: 2, price: 598, link: "https://square.link/u/P5qSL8f9" },
+      { passengers: 3, price: 897, link: "https://square.link/u/cxjzzYd4" },
     ],
   },
   {
@@ -115,8 +115,8 @@ const services = [
     name: "San Francisco Night Flight Tour",
     duration: "40 min",
     options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/cxjzzYd4" },
-      { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
+      { passengers: 2, price: 598, link: "https://square.link/u/P5qSL8f9" },
+      { passengers: 3, price: 897, link: "https://square.link/u/cxjzzYd4" },
     ],
   },
   {
