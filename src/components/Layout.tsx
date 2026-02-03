@@ -1,5 +1,4 @@
 import { ReactNode, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MapPin, Clock, Plane } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -8,16 +7,23 @@ interface LayoutProps {
 }
 
 const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Flight Tour Information", path: "/tours" },
-  { name: "Book Online", path: "/book" },
-  { name: "Customer Reviews", path: "/reviews" },
-  { name: "Contact Us", path: "/contact" },
+  { name: "Home", href: "#home" },
+  { name: "Flight Tour Information", href: "#tours" },
+  { name: "Book Online", href: "#book" },
+  { name: "Customer Reviews", href: "#reviews" },
+  { name: "Contact Us", href: "#contact" },
 ];
 
 const Layout = ({ children }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+
+  const handleNavClick = (href: string) => {
+    setMobileMenuOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -26,27 +32,34 @@ const Layout = ({ children }: LayoutProps) => {
         <nav className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("#home");
+              }}
+              className="flex items-center gap-2"
+            >
               <Plane className="h-8 w-8 text-primary" />
               <span className="font-serif text-lg lg:text-xl font-semibold text-foreground">
                 Fly SF Tours
               </span>
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                    location.pathname === link.path
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
+                  className="px-4 py-2 text-sm font-medium transition-colors rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
             </div>
 
@@ -59,8 +72,11 @@ const Layout = ({ children }: LayoutProps) => {
                 <Phone className="h-4 w-4" />
                 510 372-6693
               </a>
-              <Button asChild variant="gold">
-                <Link to="/book">Book Now</Link>
+              <Button
+                variant="gold"
+                onClick={() => handleNavClick("#book")}
+              >
+                Book Now
               </Button>
             </div>
 
@@ -79,18 +95,17 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="lg:hidden py-4 border-t border-border animate-fade-in">
               <div className="flex flex-col gap-1">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                      location.pathname === link.path
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    }}
+                    className="px-4 py-3 text-sm font-medium rounded-lg transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
                 <a
                   href="tel:5103726693"
@@ -114,12 +129,19 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <Link to="/" className="flex items-center gap-2 mb-4">
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("#home");
+                }}
+                className="flex items-center gap-2 mb-4"
+              >
                 <Plane className="h-8 w-8 text-primary" />
                 <span className="font-serif text-xl font-semibold text-foreground">
                   Fly SF Tours
                 </span>
-              </Link>
+              </a>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 The finest selection of aerial tours in the San Francisco Bay Area.
               </p>
@@ -180,8 +202,12 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Mobile Sticky CTA */}
       <div className="lg:hidden sticky-cta">
-        <Button asChild variant="gold" className="w-full">
-          <Link to="/book">Book Your Flight Now</Link>
+        <Button
+          variant="gold"
+          className="w-full"
+          onClick={() => handleNavClick("#book")}
+        >
+          Book Your Flight Now
         </Button>
       </div>
     </div>
