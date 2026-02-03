@@ -27,8 +27,8 @@ During the approximate 40 minute tour, your skilled pilot will craft a unique an
 
 Your departure and arrival location will be at the Hayward Executive Airport (KHWD), near the San Mateo Bridge.`,
     bookingOptions: [
-      { passengers: 2, price: 578, link: "https://square.link/u/QWpwVyfW" },
-      { passengers: 3, price: 867, link: "https://square.link/u/KuwZKdgB" },
+      { passengers: 2, price: 578, link: "https://square.link/u/BcShxbkk" },
+      { passengers: 3, price: 867, link: "https://square.link/u/UZ7jzqxx" },
     ],
   },
   {
@@ -42,8 +42,8 @@ Fly directly out to the Pacific coast and soar over the Golden Gate Bridge. Cont
 
 Our experienced pilots will make the flight truly unforgettable, giving you plenty of opportunities to take stunning aerial pictures of the sights of the beautiful bay city as you fly over them.`,
     bookingOptions: [
-      { passengers: 2, price: 618, link: "https://square.link/u/BcShxbkk" },
-      { passengers: 3, price: 927, link: "https://square.link/u/UZ7jzqxx" },
+      { passengers: 2, price: 618, link: "https://square.link/u/QWpwVyfW" },
+      { passengers: 3, price: 927, link: "https://square.link/u/KuwZKdgB" },
     ],
   },
   {
@@ -91,16 +91,16 @@ const services = [
     name: "San Francisco Bay Area Flight Tour",
     duration: "40 min",
     options: [
-      { passengers: 2, price: 578, link: "https://square.link/u/QWpwVyfW" },
-      { passengers: 3, price: 867, link: "https://square.link/u/KuwZKdgB" },
+      { passengers: 2, price: 578, link: "https://square.link/u/BcShxbkk" },
+      { passengers: 3, price: 867, link: "https://square.link/u/UZ7jzqxx" },
     ],
   },
   {
     name: "Elite San Francisco Bay Area Tour",
     duration: "1 hr",
     options: [
-      { passengers: 2, price: 618, link: "https://square.link/u/BcShxbkk" },
-      { passengers: 3, price: 927, link: "https://square.link/u/UZ7jzqxx" },
+      { passengers: 2, price: 618, link: "https://square.link/u/QWpwVyfW" },
+      { passengers: 3, price: 927, link: "https://square.link/u/KuwZKdgB" },
     ],
   },
   {
