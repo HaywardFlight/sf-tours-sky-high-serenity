@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import { Clock, AlertCircle, Phone } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useLivePricing } from "@/hooks/useLivePricing";
@@ -48,11 +48,6 @@ const services = [
   },
 ];
 
-function TierBadge({ tier }: { tier: string }) {
-  if (tier === "PEAK") return <Badge variant="default" className="ml-2 text-[10px] px-2 py-0.5">Premium Day</Badge>;
-  if (tier === "OFFPEAK") return <Badge variant="secondary" className="ml-2 text-[10px] px-2 py-0.5">Special Rate</Badge>;
-  return null;
-}
 
 const Book = () => {
   const { tierMap } = useLivePricing();
@@ -139,7 +134,6 @@ const Book = () => {
                             rel="noopener noreferrer"
                           >
                             Book Now – {passengers} Passengers ({formatPrice(pricing.price)})
-                            <TierBadge tier={pricing.tier} />
                           </a>
                         </Button>
                       );
