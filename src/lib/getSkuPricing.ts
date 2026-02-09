@@ -1,5 +1,9 @@
 import { PRICE_MAP, type Sku, type Tier, type TierPricing } from "@/data/pricingMap";
 
+const debugPricing =
+  (typeof window !== "undefined" && new URLSearchParams(window.location.search).has("debugPricing")) ||
+  (import.meta.env?.DEV ?? false);
+
 export function getSkuPricing(
   sku: Sku,
   tierMap: Record<Sku, Tier>
@@ -10,7 +14,15 @@ export function getSkuPricing(
   // Fallback to STANDARD if entry missing or url empty
   if (!entry || !entry.url) {
     const fallback = PRICE_MAP[sku]?.STANDARD;
-    return { tier: "STANDARD", price: fallback?.price ?? 0, url: fallback?.url ?? "" };
+    const result = { tier: "STANDARD" as Tier, price: fallback?.price ?? 0, url: fallback?.url ?? "" };
+    if (debugPricing) {
+      console.log(`[pricing] ${sku} | requested=${tier} | FALLBACK to STANDARD | price=${result.price} | url=${result.url}`);
+    }
+    return result;
+  }
+
+  if (debugPricing) {
+    console.log(`[pricing] ${sku} | tier=${tier} | price=${entry.price} | url=${entry.url}`);
   }
 
   return { tier, price: entry.price, url: entry.url };
