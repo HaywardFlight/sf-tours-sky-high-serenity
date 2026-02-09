@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { Phone, ArrowRight, Plane, Star, Shield, Camera, Clock, Users, AlertCircle, Send, CheckCircle, ExternalLink, Quote, MapPin } from "lucide-react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/hero-golden-gate.jpg";
@@ -12,6 +13,9 @@ import tourSunset from "@/assets/tour-sunset.jpg";
 import tourNight from "@/assets/tour-night.jpg";
 import tourNapa from "@/assets/tour-napa.jpg";
 import { toast } from "sonner";
+import { useLivePricing } from "@/hooks/useLivePricing";
+import { getSkuPricing, formatPrice } from "@/lib/getSkuPricing";
+import type { Sku } from "@/data/pricingMap";
 
 const tours = [
   {
@@ -26,9 +30,9 @@ The flight continues to Alcatraz, around Angel Island, and then along the towns 
 During the approximate 40 minute tour, your skilled pilot will craft a unique and unforgettable experience as you buzz through the SF Bay Area airspace. Your flight takes place in a Cessna 172 Skyhawk with 4 seats (3 passengers and one pilot).
 
 Your departure and arrival location will be at the Hayward Executive Airport (KHWD), near the San Mateo Bridge.`,
-    bookingOptions: [
-      { passengers: 2, price: 578, link: "https://square.link/u/BcShxbkk" },
-      { passengers: 3, price: 867, link: "https://square.link/u/UZ7jzqxx" },
+    skus: [
+      { sku: "bay_40_2p" as Sku, passengers: 2 },
+      { sku: "bay_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
@@ -41,9 +45,9 @@ Your departure and arrival location will be at the Hayward Executive Airport (KH
 Fly directly out to the Pacific coast and soar over the Golden Gate Bridge. Continue your flight over Downtown San Francisco and along the waterfront. Look down at Fisherman's Wharf and Pier 39, then continue over Alcatraz. Fly around Angel Island, then along the coast, admiring the towns of Tiburon and Sausalito. When it is time to head back, see San Francisco International Airport (KSFO) from a totally unique angle.
 
 Our experienced pilots will make the flight truly unforgettable, giving you plenty of opportunities to take stunning aerial pictures of the sights of the beautiful bay city as you fly over them.`,
-    bookingOptions: [
-      { passengers: 2, price: 618, link: "https://square.link/u/QWpwVyfW" },
-      { passengers: 3, price: 927, link: "https://square.link/u/KuwZKdgB" },
+    skus: [
+      { sku: "elite_60_2p" as Sku, passengers: 2 },
+      { sku: "elite_60_3p" as Sku, passengers: 3 },
     ],
   },
   {
@@ -54,9 +58,9 @@ Our experienced pilots will make the flight truly unforgettable, giving you plen
     description: `The San Francisco Sunset Tour is one of the most unforgettable experiences that we offer. Perfect for couples, anniversaries, flying enthusiasts, or anyone who wants to experience the beauty of the San Francisco sunset from the air.
 
 Admire as the brilliant red horizon clashes with the well-lit Downtown San Francisco. Our skilled pilots will expertly maneuver your airplane to allow you to enjoy and photograph the best views SF has to offer.`,
-    bookingOptions: [
-      { passengers: 2, price: 598, link: "https://square.link/u/KTnZ09wK" },
-      { passengers: 3, price: 897, link: "https://square.link/u/DmtCoUbX" },
+    skus: [
+      { sku: "sunset_40_2p" as Sku, passengers: 2 },
+      { sku: "sunset_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
@@ -69,9 +73,9 @@ Admire as the brilliant red horizon clashes with the well-lit Downtown San Franc
 Meet your pilot at the airport, strap in, and take to the skies. Fly directly out to the Pacific Coast, admiring the Bay Lights art installation on the San Francisco-Oakland Bay Bridge. Next, fly over the engineering wonder that is the Golden Gate Bridge, it up for the night.
 
 Continue your flight over Downtown San Francisco, spotting the city's main attractions from the air. Then, follow the waterfront, admiring the city's lights as you fly. Take in the popular tourist attraction of Fisherman's Wharf and Pier 39 before landing back at the airport.`,
-    bookingOptions: [
-      { passengers: 2, price: 598, link: "https://square.link/u/P5qSL8f9" },
-      { passengers: 3, price: 897, link: "https://square.link/u/cxjzzYd4" },
+    skus: [
+      { sku: "night_40_2p" as Sku, passengers: 2 },
+      { sku: "night_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
@@ -80,8 +84,8 @@ Continue your flight over Downtown San Francisco, spotting the city's main attra
     image: tourNapa,
     duration: "1 hr 30 min",
     description: `Admire the endless vineyards of Napa Valley from a new perspective. Relax as our pilots fly you over Wine Country so you can enjoy the best views Napa has to offer. If you love greenery and experiencing the beauty of nature, this will be an unforgettable experience you won't regret!`,
-    bookingOptions: [
-      { passengers: 2, price: 638, link: "https://square.link/u/sNovpR2d" },
+    skus: [
+      { sku: "napa_90_2p" as Sku, passengers: 2 },
     ],
   },
 ];
@@ -90,45 +94,52 @@ const services = [
   {
     name: "San Francisco Bay Area Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 578, link: "https://square.link/u/BcShxbkk" },
-      { passengers: 3, price: 867, link: "https://square.link/u/UZ7jzqxx" },
+    skus: [
+      { sku: "bay_40_2p" as Sku, passengers: 2 },
+      { sku: "bay_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "Elite San Francisco Bay Area Tour",
     duration: "1 hr",
-    options: [
-      { passengers: 2, price: 618, link: "https://square.link/u/QWpwVyfW" },
-      { passengers: 3, price: 927, link: "https://square.link/u/KuwZKdgB" },
+    skus: [
+      { sku: "elite_60_2p" as Sku, passengers: 2 },
+      { sku: "elite_60_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "San Francisco Sunset Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/KTnZ09wK" },
-      { passengers: 3, price: 897, link: "https://square.link/u/DmtCoUbX" },
+    skus: [
+      { sku: "sunset_40_2p" as Sku, passengers: 2 },
+      { sku: "sunset_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "San Francisco Night Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/P5qSL8f9" },
-      { passengers: 3, price: 897, link: "https://square.link/u/cxjzzYd4" },
+    skus: [
+      { sku: "night_40_2p" as Sku, passengers: 2 },
+      { sku: "night_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "Napa Valley Wine Country Flight Tour",
     duration: "1 hr 30 min",
-    options: [
-      { passengers: 2, price: 638, link: "https://square.link/u/sNovpR2d" },
+    skus: [
+      { sku: "napa_90_2p" as Sku, passengers: 2 },
     ],
   },
 ];
 
+function TierBadge({ tier }: { tier: string }) {
+  if (tier === "PEAK") return <Badge variant="default" className="ml-2 text-[10px] px-2 py-0.5">Premium Day</Badge>;
+  if (tier === "OFFPEAK") return <Badge variant="secondary" className="ml-2 text-[10px] px-2 py-0.5">Special Rate</Badge>;
+  return null;
+}
+
 const Index = () => {
+  const { tierMap } = useLivePricing();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -350,22 +361,26 @@ const Index = () => {
                   {/* Booking Buttons */}
                   <div className="space-y-3">
                     <div className="flex flex-wrap gap-3">
-                      {tour.bookingOptions.map((option) => (
-                        <Button
-                          key={option.passengers}
-                          asChild
-                          variant="gold"
-                          size="lg"
-                        >
-                          <a
-                            href={option.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                      {tour.skus.map(({ sku, passengers }) => {
+                        const pricing = getSkuPricing(sku, tierMap);
+                        return (
+                          <Button
+                            key={sku}
+                            asChild
+                            variant="gold"
+                            size="lg"
                           >
-                            Book Now – {option.passengers} Passengers (${option.price})
-                          </a>
-                        </Button>
-                      ))}
+                            <a
+                              href={pricing.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Book Now – {passengers} Passengers ({formatPrice(pricing.price)})
+                              <TierBadge tier={pricing.tier} />
+                            </a>
+                          </Button>
+                        );
+                      })}
                     </div>
                     <p className="text-sm text-muted-foreground">
                       Flight time will be confirmed after booking based on availability and weather.
@@ -434,23 +449,27 @@ const Index = () => {
 
                   {/* Booking Options */}
                   <div className="space-y-3">
-                    {service.options.map((option) => (
-                      <Button
-                        key={option.passengers}
-                        asChild
-                        variant="gold"
-                        size="lg"
-                        className="w-full"
-                      >
-                        <a
-                          href={option.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                    {service.skus.map(({ sku, passengers }) => {
+                      const pricing = getSkuPricing(sku, tierMap);
+                      return (
+                        <Button
+                          key={sku}
+                          asChild
+                          variant="gold"
+                          size="lg"
+                          className="w-full"
                         >
-                          Book Now – {option.passengers} Passengers (${option.price})
-                        </a>
-                      </Button>
-                    ))}
+                          <a
+                            href={pricing.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Book Now – {passengers} Passengers ({formatPrice(pricing.price)})
+                            <TierBadge tier={pricing.tier} />
+                          </a>
+                        </Button>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
@@ -790,15 +809,18 @@ const Index = () => {
               Ready for an Unforgettable Experience?
             </h2>
             <p className="text-lg text-muted-foreground mb-10">
-              Book your aerial adventure today and see San Francisco like never before.
+              Book your aerial tour today and see San Francisco like never before.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="gold" size="xl" onClick={() => scrollToSection("#book")}>
-                Book Your Flight
+                Book Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" onClick={() => scrollToSection("#tours")}>
-                View All Tours
+              <Button asChild variant="outline" size="lg">
+                <a href="tel:5103726693">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Call 510 372-6693
+                </a>
               </Button>
             </div>
           </div>

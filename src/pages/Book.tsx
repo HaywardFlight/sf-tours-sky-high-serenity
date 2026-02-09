@@ -1,50 +1,62 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Clock, AlertCircle, Phone } from "lucide-react";
 import Layout from "@/components/Layout";
+import { useLivePricing } from "@/hooks/useLivePricing";
+import { getSkuPricing, formatPrice } from "@/lib/getSkuPricing";
+import type { Sku } from "@/data/pricingMap";
 
 const services = [
   {
     name: "San Francisco Bay Area Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 578, link: "https://square.link/u/QWpwVyfW" },
-      { passengers: 3, price: 867, link: "https://square.link/u/KuwZKdgB" },
+    skus: [
+      { sku: "bay_40_2p" as Sku, passengers: 2 },
+      { sku: "bay_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "Elite San Francisco Bay Area Tour",
     duration: "1 hr",
-    options: [
-      { passengers: 2, price: 618, link: "https://square.link/u/BcShxbkk" },
-      { passengers: 3, price: 927, link: "https://square.link/u/UZ7jzqxx" },
+    skus: [
+      { sku: "elite_60_2p" as Sku, passengers: 2 },
+      { sku: "elite_60_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "San Francisco Sunset Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/sNovpR2d" },
-      { passengers: 3, price: 897, link: "https://square.link/u/P5qSL8f9" },
+    skus: [
+      { sku: "sunset_40_2p" as Sku, passengers: 2 },
+      { sku: "sunset_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "San Francisco Night Flight Tour",
     duration: "40 min",
-    options: [
-      { passengers: 2, price: 598, link: "https://square.link/u/cxjzzYd4" },
-      { passengers: 3, price: 897, link: "https://square.link/u/KTnZ09wK" },
+    skus: [
+      { sku: "night_40_2p" as Sku, passengers: 2 },
+      { sku: "night_40_3p" as Sku, passengers: 3 },
     ],
   },
   {
     name: "Napa Valley Wine Country Flight Tour",
     duration: "1 hr 30 min",
-    options: [
-      { passengers: 2, price: 638, link: "https://square.link/u/DmtCoUbX" },
+    skus: [
+      { sku: "napa_90_2p" as Sku, passengers: 2 },
     ],
   },
 ];
 
+function TierBadge({ tier }: { tier: string }) {
+  if (tier === "PEAK") return <Badge variant="default" className="ml-2 text-[10px] px-2 py-0.5">Premium Day</Badge>;
+  if (tier === "OFFPEAK") return <Badge variant="secondary" className="ml-2 text-[10px] px-2 py-0.5">Special Rate</Badge>;
+  return null;
+}
+
 const Book = () => {
+  const { tierMap } = useLivePricing();
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -111,23 +123,27 @@ const Book = () => {
 
                   {/* Booking Options */}
                   <div className="space-y-3">
-                    {service.options.map((option) => (
-                      <Button
-                        key={option.passengers}
-                        asChild
-                        variant="gold"
-                        size="lg"
-                        className="w-full"
-                      >
-                        <a
-                          href={option.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                    {service.skus.map(({ sku, passengers }) => {
+                      const pricing = getSkuPricing(sku, tierMap);
+                      return (
+                        <Button
+                          key={sku}
+                          asChild
+                          variant="gold"
+                          size="lg"
+                          className="w-full"
                         >
-                          Book Now – {option.passengers} Passengers (${option.price})
-                        </a>
-                      </Button>
-                    ))}
+                          <a
+                            href={pricing.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Book Now – {passengers} Passengers ({formatPrice(pricing.price)})
+                            <TierBadge tier={pricing.tier} />
+                          </a>
+                        </Button>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
