@@ -1,57 +1,11 @@
 import { Button } from "@/components/ui/button";
-
 import { Clock, AlertCircle, Phone } from "lucide-react";
 import Layout from "@/components/Layout";
-import { useLivePricing } from "@/hooks/useLivePricing";
-import { getSkuPricing, formatPrice } from "@/lib/getSkuPricing";
-import type { Sku } from "@/data/pricingMap";
+import { getTourOptions, formatPrice, type TourKey } from "@/data/bookingLinks";
 
-const services = [
-  {
-    name: "San Francisco Bay Area Flight Tour",
-    duration: "40 min",
-    skus: [
-      { sku: "bay_40_2p" as Sku, passengers: 2 },
-      { sku: "bay_40_3p" as Sku, passengers: 3 },
-    ],
-  },
-  {
-    name: "Elite San Francisco Bay Area Tour",
-    duration: "1 hr",
-    skus: [
-      { sku: "elite_60_2p" as Sku, passengers: 2 },
-      { sku: "elite_60_3p" as Sku, passengers: 3 },
-    ],
-  },
-  {
-    name: "San Francisco Sunset Flight Tour",
-    duration: "40 min",
-    skus: [
-      { sku: "sunset_40_2p" as Sku, passengers: 2 },
-      { sku: "sunset_40_3p" as Sku, passengers: 3 },
-    ],
-  },
-  {
-    name: "San Francisco Night Flight Tour",
-    duration: "40 min",
-    skus: [
-      { sku: "night_40_2p" as Sku, passengers: 2 },
-      { sku: "night_40_3p" as Sku, passengers: 3 },
-    ],
-  },
-  {
-    name: "Napa Valley Wine Country Flight Tour",
-    duration: "1 hr 30 min",
-    skus: [
-      { sku: "napa_90_2p" as Sku, passengers: 2 },
-    ],
-  },
-];
-
+const serviceKeys: TourKey[] = ["bay", "elite", "sunset", "night", "napa"];
 
 const Book = () => {
-  const { tierMap } = useLivePricing();
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -98,49 +52,49 @@ const Book = () => {
 
             {/* Pricing Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="glass-card p-6 tour-card"
-                >
-                  {/* Duration Badge */}
-                  <div className="flex items-center justify-end mb-4">
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span className="text-sm">{service.duration}</span>
+              {serviceKeys.map((key) => {
+                const service = getTourOptions(key);
+                return (
+                  <div
+                    key={key}
+                    className="glass-card p-6 tour-card"
+                  >
+                    {/* Duration Badge */}
+                    <div className="flex items-center justify-end mb-4">
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Clock className="h-4 w-4" />
+                        <span className="text-sm">{service.duration}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Service Name */}
-                  <h3 className="font-serif text-lg font-semibold text-foreground mb-6 leading-tight">
-                    {service.name}
-                  </h3>
+                    {/* Service Name */}
+                    <h3 className="font-serif text-lg font-semibold text-foreground mb-6 leading-tight">
+                      {service.name}
+                    </h3>
 
-                  {/* Booking Options */}
-                  <div className="space-y-3">
-                    {service.skus.map(({ sku, passengers }) => {
-                      const pricing = getSkuPricing(sku, tierMap);
-                      return (
+                    {/* Booking Options */}
+                    <div className="space-y-3">
+                      {service.options.map(({ passengers, price, url }) => (
                         <Button
-                          key={sku}
+                          key={passengers}
                           asChild
                           variant="gold"
                           size="lg"
                           className="w-full"
                         >
                           <a
-                            href={pricing.url}
+                            href={url}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Book Now – {passengers} Passengers ({formatPrice(pricing.price)})
+                            Book Now – {passengers} Passengers ({formatPrice(price)})
                           </a>
                         </Button>
-                      );
-                    })}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Booking Note */}
