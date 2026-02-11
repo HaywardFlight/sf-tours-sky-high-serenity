@@ -44,6 +44,7 @@ export const BOOKING_LINKS = {
     name: "Napa Valley Wine Country Flight Tour",
     duration: "1 hr 30 min",
     p2: { price: 718, url: "https://square.link/u/rfKj7QUZ" },
+    p3: { price: 1077, url: "https://square.link/u/Ph9gkuG3" },
   },
 } as const satisfies Record<string, TourBooking>;
 
