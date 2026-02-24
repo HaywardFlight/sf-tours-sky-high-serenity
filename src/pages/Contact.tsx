@@ -81,6 +81,26 @@ const Contact = () => {
                   </a>
                 </div>
 
+                {/* Email */}
+                <div className="glass-card p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Send className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-lg font-semibold text-foreground">
+                        Email
+                      </h3>
+                    </div>
+                  </div>
+                  <a
+                    href="mailto:flighthayward@gmail.com"
+                    className="text-lg font-bold text-primary hover:underline break-all"
+                  >
+                    flighthayward@gmail.com
+                  </a>
+                </div>
+
                 {/* Hours */}
                 <div className="glass-card p-6">
                   <div className="flex items-center gap-4 mb-4">
