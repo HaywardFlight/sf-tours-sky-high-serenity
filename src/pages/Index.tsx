@@ -500,7 +500,58 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* FAQ Section */}
+      <section className="section-spacing bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <p className="text-primary font-medium text-sm tracking-widest uppercase mb-4">
+              Common Questions
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-8">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-6">
+            <div className="glass-card p-6">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-3">
+                Are bookings refundable?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                All bookings are non-refundable. Please ensure your availability before booking.
+              </p>
+            </div>
+
+            <div className="glass-card p-6">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-3">
+                How far in advance should I book?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                We recommend booking at least 2 days in advance. Bookings close 2 days before the session starts.
+              </p>
+            </div>
+
+            <div className="glass-card p-6">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-3">
+                What happens if the weather is bad?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Safety is our top priority. If weather conditions are unsuitable for flying, we will work with you to reschedule your flight.
+              </p>
+            </div>
+
+            <div className="glass-card p-6">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-3">
+                How many passengers can fly per tour?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Each flight accommodates up to 3 passengers in addition to the pilot aboard a Cessna 172 Skyhawk.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="contact" className="section-spacing bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-12">
