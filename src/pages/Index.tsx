@@ -378,6 +378,9 @@ const Index = () => {
                           </a>
                         </Button>
                       ))}
+                      <p className="text-xs text-muted-foreground/70 text-center pt-1">
+                        By booking, you agree that all flights are non-refundable.
+                      </p>
                     </div>
                   </div>
                 );
