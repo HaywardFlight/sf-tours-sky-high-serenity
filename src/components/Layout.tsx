@@ -192,7 +192,10 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-12 pt-8 border-t border-border text-center">
+          <div className="mt-12 pt-8 border-t border-border text-center space-y-2">
+            <p className="text-muted-foreground/70 text-xs">
+              All flight bookings are non-refundable.
+            </p>
             <p className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} Fly San Francisco Tours. All rights reserved.
             </p>
