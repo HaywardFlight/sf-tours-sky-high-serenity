@@ -135,6 +135,9 @@ const Tours = () => {
                       <p className="text-sm text-muted-foreground">
                         Flight time will be confirmed after booking based on availability and weather.
                       </p>
+                      <p className="text-xs text-muted-foreground/70">
+                        All bookings are non-refundable.
+                      </p>
                     </div>
                   </div>
                 </div>

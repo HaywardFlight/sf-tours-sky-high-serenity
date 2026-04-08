@@ -91,6 +91,9 @@ const Book = () => {
                           </a>
                         </Button>
                       ))}
+                      <p className="text-xs text-muted-foreground/70 text-center pt-1">
+                        By booking, you agree that all flights are non-refundable.
+                      </p>
                     </div>
                   </div>
                 );
@@ -98,9 +101,12 @@ const Book = () => {
             </div>
 
             {/* Booking Note */}
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-center space-y-1">
               <p className="text-sm text-muted-foreground">
                 Flight time will be confirmed after booking based on availability and weather.
+              </p>
+              <p className="text-xs text-muted-foreground/70">
+                All bookings are non-refundable. Please ensure your availability before booking.
               </p>
             </div>
           </div>
